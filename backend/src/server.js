@@ -7,6 +7,7 @@ const pool = require('./db/pool');
 const { laaiGebruiker } = require('./auth/session');
 const authRouter = require('./routes/auth');
 const notesRouter = require('./routes/notes');
+const profielRouter = require('./routes/profiel');
 
 const app = express();
 
@@ -35,6 +36,7 @@ app.get('/api/health', async (req, res) => {
 });
 
 app.use('/api/auth', authRouter);
+app.use('/api/profiel', profielRouter);
 app.use('/api/notes', notesRouter);
 
 const PORT = process.env.PORT || 3000;
