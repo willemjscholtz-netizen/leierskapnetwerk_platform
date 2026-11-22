@@ -1,9 +1,13 @@
 # Geheime - die belangrikste reel in hierdie leer
 .env
+.mailpass
 
 # Node
 node_modules/
 npm-debug.log*
+
+# Rugsteunlêers
+*.bak
 
 # macOS
 .DS_Store
@@ -11,9 +15,3 @@ npm-debug.log*
 # Redigeerder
 .vscode/
 .idea/
-
-# E-poswagwoord vir ontwikkeling
-.mailpass
-
-# Rugsteunlêers
-*.bak
