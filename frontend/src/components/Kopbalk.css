@@ -1,0 +1,34 @@
+.kopbalk {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--ruimte-4);
+  min-height: 64px;
+  padding: 0 var(--ruimte-5);
+}
+
+.kopbalk__links,
+.kopbalk__regs {
+  display: flex;
+  align-items: center;
+  gap: var(--ruimte-4);
+  min-width: 0;
+}
+
+.kopbalk__terug {
+  font: inherit;
+  font-size: var(--teks-sm);
+  color: var(--kleur-teks-sag);
+  background: none;
+  border: none;
+  padding: var(--ruimte-2) var(--ruimte-2) var(--ruimte-2) 0;
+  min-height: var(--raak-min);
+  cursor: pointer;
+  white-space: nowrap;
+}
+
+.kopbalk__terug:hover { color: var(--kleur-rooi); }
+
+@media (max-width: 640px) {
+  .kopbalk { padding: 0 var(--ruimte-4); }
+}

@@ -1,0 +1,27 @@
+.sterkte {
+  list-style: none;
+  margin: calc(var(--ruimte-2) * -1) 0 var(--ruimte-4);
+  padding: var(--ruimte-3) var(--ruimte-4);
+  background: var(--kleur-oppervlak-sag);
+  border-radius: var(--radius-md);
+  font-size: var(--teks-xs);
+  display: grid;
+  gap: var(--ruimte-1);
+}
+
+.sterkte__reel {
+  display: flex;
+  align-items: center;
+  gap: var(--ruimte-2);
+  color: var(--kleur-teks-sag);
+}
+
+/* Die regmerkie alleen is nie die boodskap nie - die teks sê
+   dit ook. Kleur is aanvullend, nooit die enigste teken. */
+.sterkte__reel--reg { color: var(--kleur-sukses); font-weight: 600; }
+
+.sterkte__teken {
+  width: 1em;
+  flex: none;
+  text-align: center;
+}

@@ -1,0 +1,48 @@
+.voltooi {
+  max-width: 560px;
+  margin: 0 auto;
+  padding: var(--ruimte-7) var(--ruimte-5) var(--ruimte-9);
+}
+
+.voltooi__kop {
+  text-align: center;
+  margin-bottom: var(--ruimte-6);
+}
+
+.voltooi__kaart {
+  background: var(--kleur-oppervlak);
+  border: 1px solid var(--kleur-rand);
+  border-radius: var(--radius-lg);
+  padding: var(--ruimte-6);
+  box-shadow: var(--skaduwee-md);
+}
+
+.voltooi__kopteks {
+  font-size: var(--teks-xl);
+  margin-bottom: var(--ruimte-3);
+}
+
+.voltooi__inleiding {
+  color: var(--kleur-teks-sag);
+  margin-bottom: var(--ruimte-5);
+}
+
+.voltooi__ligging-ok {
+  padding: var(--ruimte-3) var(--ruimte-4);
+  background: var(--kleur-sukses-sag);
+  border-left: 4px solid var(--kleur-sukses);
+  border-radius: var(--radius-md);
+  color: var(--kleur-sukses);
+  font-size: var(--teks-sm);
+  font-weight: 600;
+}
+
+/* Die keuse-veld gebruik dieselfde voorkoms as die inset-veld,
+   sodat die vorm nie twee soorte velde wys nie. */
+select.veld__inset {
+  appearance: none;
+  background-image: url("data:image/svg+xml;charset=utf-8,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8'%3E%3Cpath fill='%235A6278' d='M6 8L0 0h12z'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: right var(--ruimte-4) center;
+  padding-right: var(--ruimte-7);
+}

@@ -1,0 +1,26 @@
+.merk {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--ruimte-3);
+}
+
+.merk__beeld {
+  width: 34px;
+  height: 34px;
+  object-fit: contain;
+  flex: none;
+}
+
+.merk__naam {
+  font-family: var(--font-opskrif);
+  font-weight: 600;
+  letter-spacing: -0.01em;
+  font-size: var(--teks-lg);
+  color: var(--kleur-donker);
+}
+
+.merk--klein .merk__beeld { width: 26px; height: 26px; }
+.merk--klein .merk__naam { font-size: var(--teks-md); }
+
+.merk--groot .merk__beeld { width: 48px; height: 48px; }
+.merk--groot .merk__naam { font-size: var(--teks-xl); }

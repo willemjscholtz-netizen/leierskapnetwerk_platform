@@ -1,0 +1,93 @@
+.sny-agtergrond {
+  position: fixed;
+  inset: 0;
+  background: rgba(44, 50, 71, 0.55);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: var(--ruimte-5);
+  z-index: 100;
+  overflow-y: auto;
+}
+
+.sny {
+  background: var(--kleur-oppervlak);
+  border-radius: var(--radius-lg);
+  padding: var(--ruimte-6);
+  box-shadow: var(--skaduwee-hoog);
+  max-width: 100%;
+}
+
+.sny__titel {
+  font-size: var(--teks-lg);
+  margin-bottom: var(--ruimte-2);
+}
+
+.sny__hulp {
+  font-size: var(--teks-sm);
+  color: var(--kleur-teks-sag);
+  margin-bottom: var(--ruimte-5);
+}
+
+/* --- Die venster --------------------------------------------- */
+
+.sny__venster {
+  position: relative;
+  margin: 0 auto var(--ruimte-5);
+  overflow: hidden;
+  border-radius: var(--radius-md);
+  background: var(--kleur-oppervlak-sag);
+  user-select: none;
+  touch-action: none;
+}
+
+.sny__beeld {
+  position: absolute;
+  max-width: none;
+  pointer-events: none;
+}
+
+/* Die sirkel wys wat uiteindelik gesien word. Dit is net 'n
+   teken - die sny self kry 'n vierkant en die prent word rond
+   vertoon deur border-radius. */
+.sny__sirkel {
+  position: absolute;
+  inset: 0;
+  border-radius: var(--radius-vol);
+  box-shadow: 0 0 0 9999px rgba(44, 50, 71, 0.45);
+  border: 2px solid #FFFFFF;
+  pointer-events: none;
+}
+
+/* --- Die glyer ----------------------------------------------- */
+
+.sny__glyer {
+  display: grid;
+  gap: var(--ruimte-2);
+  margin-bottom: var(--ruimte-5);
+}
+
+.sny__glyer-etiket {
+  font-size: var(--teks-sm);
+  font-weight: 600;
+}
+
+.sny__glyer input[type="range"] {
+  width: 100%;
+  accent-color: var(--kleur-rooi);
+  height: var(--raak-min);
+}
+
+/* --- Die knoppies -------------------------------------------- */
+
+.sny__knoppies {
+  display: flex;
+  gap: var(--ruimte-3);
+  justify-content: flex-end;
+  flex-wrap: wrap;
+}
+
+@media (max-width: 480px) {
+  .sny__knoppies { justify-content: stretch; }
+  .sny__knoppies > * { flex: 1; }
+}

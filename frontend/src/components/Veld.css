@@ -1,0 +1,54 @@
+.veld {
+  display: flex;
+  flex-direction: column;
+  gap: var(--ruimte-2);
+  margin-bottom: var(--ruimte-4);
+}
+
+.veld__etiket {
+  font-size: var(--teks-sm);
+  font-weight: 600;
+  color: var(--kleur-teks);
+}
+
+.veld__verpligtend { color: var(--kleur-fout); }
+
+.veld__hulp {
+  font-size: var(--teks-xs);
+  color: var(--kleur-teks-sag);
+  margin-top: calc(var(--ruimte-1) * -1);
+}
+
+.veld__inset {
+  font: inherit;
+  width: 100%;
+  min-height: var(--raak-min);
+  padding: var(--ruimte-3) var(--ruimte-4);
+  color: var(--kleur-teks);
+  background: var(--kleur-oppervlak);
+  border: 1px solid var(--kleur-rand-sterk);
+  border-radius: var(--radius-md);
+  transition: border-color var(--oorgang-vinnig), box-shadow var(--oorgang-vinnig);
+}
+
+.veld__inset::placeholder { color: var(--kleur-teks-broos); }
+.veld__inset:hover { border-color: var(--kleur-teks-sag); }
+
+/* Fokus: die rand word aksentkleur EN ons hou die ring.
+   Twee tekens, want kleur alleen is nie genoeg nie (WCAG 1.4.1). */
+.veld__inset:focus {
+  outline: 2px solid var(--kleur-rooi);
+  outline-offset: 1px;
+  border-color: var(--kleur-rooi);
+}
+
+.veld--fout .veld__inset {
+  border-color: var(--kleur-fout);
+  background: var(--kleur-fout-sag);
+}
+
+.veld__fout {
+  font-size: var(--teks-sm);
+  font-weight: 500;
+  color: var(--kleur-fout);
+}

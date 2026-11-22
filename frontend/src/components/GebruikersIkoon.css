@@ -1,0 +1,86 @@
+.ikoon {
+  position: relative;
+}
+
+.ikoon__knoppie {
+  width: 42px;
+  height: 42px;
+  padding: 0;
+  border: 1px solid var(--kleur-rand-sterk);
+  border-radius: var(--radius-vol);
+  background: var(--kleur-donker);
+  color: #fff;
+  font-family: var(--font-liggaam);
+  font-size: 0.875rem;
+  font-weight: 600;
+  letter-spacing: 0.02em;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  transition: background var(--oorgang-vinnig);
+}
+
+.ikoon__knoppie:hover {
+  background: var(--kleur-donker-sag);
+}
+
+.ikoon__voorletters {
+  line-height: 1;
+}
+
+.ikoon__kieslys {
+  position: absolute;
+  top: calc(100% + 8px);
+  right: 0;
+  min-width: 240px;
+  background: var(--kleur-oppervlak);
+  border: 1px solid var(--kleur-rand);
+  border-radius: var(--radius-md);
+  box-shadow: var(--skaduwee-hoog);
+  padding: var(--ruimte-2);
+  z-index: 50;
+}
+
+.ikoon__kop {
+  padding: var(--ruimte-3);
+  border-bottom: 1px solid var(--kleur-rand);
+  margin-bottom: var(--ruimte-2);
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.ikoon__kop strong {
+  font-size: var(--teks-sm);
+  color: var(--kleur-teks);
+}
+
+.ikoon__epos {
+  font-size: var(--teks-xs);
+  color: var(--kleur-teks-sag);
+  overflow-wrap: anywhere;
+}
+
+.ikoon__item {
+  display: block;
+  width: 100%;
+  text-align: left;
+  padding: var(--ruimte-3);
+  min-height: var(--raak-min);
+  font: inherit;
+  font-size: var(--teks-sm);
+  color: var(--kleur-teks);
+  background: none;
+  border: none;
+  border-radius: var(--radius-sm);
+  cursor: pointer;
+}
+
+.ikoon__item:hover {
+  background: var(--kleur-oppervlak-sag);
+}
+
+.ikoon__item--uit {
+  color: var(--kleur-rooi);
+}

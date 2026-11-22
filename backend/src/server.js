@@ -6,7 +6,11 @@ const cookieParser = require('cookie-parser');
 const pool = require('./db/pool');
 const { laaiGebruiker } = require('./auth/session');
 const authRouter = require('./routes/auth');
+const authGoogleRouter = require('./routes/auth-google');
+const authMetaRouter = require('./routes/auth-meta');
 const profielRouter = require('./routes/profiel');
+const profielVolledigheidRouter = require('./routes/profiel-volledigheid');
+const profielPrentRouter = require('./routes/profiel-prent');
 
 const app = express();
 
@@ -34,11 +38,15 @@ app.get('/api/health', async (req, res) => {
   }
 });
 
+app.use('/api/auth/google', authGoogleRouter);
+app.use('/api/auth/meta', authMetaRouter);
 app.use('/api/auth', authRouter);
+app.use('/api/profiel/volledigheid', profielVolledigheidRouter);
+app.use('/api/profiel/prent', profielPrentRouter);
 app.use('/api/profiel', profielRouter);
 
 const PORT = process.env.PORT || 3000;
 app.listen(PORT, () => {
   console.log(`Backend loop op http://localhost:${PORT}`);
-  console.log('Roetes: /api/health, /api/auth/*, /api/profiel/*');
+  console.log('Roetes: /api/health, /api/auth/*, /api/auth/google/*, /api/auth/meta/*, /api/profiel/*');
 });

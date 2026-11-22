@@ -1,0 +1,25 @@
+.mededeling {
+  padding: var(--ruimte-3) var(--ruimte-4);
+  border-radius: var(--radius-md);
+  border-left: 4px solid;
+  font-size: var(--teks-sm);
+  margin-bottom: var(--ruimte-4);
+}
+
+.mededeling--fout {
+  background: var(--kleur-fout-sag);
+  border-color: var(--kleur-fout);
+  color: var(--kleur-fout);
+}
+
+.mededeling--sukses {
+  background: var(--kleur-sukses-sag);
+  border-color: var(--kleur-sukses);
+  color: var(--kleur-sukses);
+}
+
+.mededeling--waarskuwing {
+  background: var(--kleur-waarskuwing-sag);
+  border-color: var(--kleur-waarskuwing);
+  color: var(--kleur-waarskuwing);
+}

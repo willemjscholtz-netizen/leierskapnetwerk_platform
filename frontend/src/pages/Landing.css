@@ -1,0 +1,158 @@
+.landing {
+  min-height: 100dvh;
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--ruimte-8);
+  max-width: var(--wydte-inhoud);
+  margin: 0 auto;
+  padding: var(--ruimte-7) var(--ruimte-5) var(--ruimte-9);
+  align-items: start;
+}
+
+/* Twee kolomme sodra daar ruimte is. Een kolom op 'n
+   selfoon - dit is nie 'n "mobiele weergawe" nie, dit is
+   dieselfde bladsy wat net anders pas. */
+@media (min-width: 900px) {
+  .landing {
+    grid-template-columns: 1fr minmax(380px, var(--wydte-vorm));
+    gap: var(--ruimte-9);
+    padding-top: var(--ruimte-9);
+  }
+}
+
+/* --- Links --------------------------------------------------- */
+.landing__storie { display: flex; flex-direction: column; gap: var(--ruimte-5); }
+
+.landing__hooflyn {
+  font-size: var(--teks-2xl);
+  max-width: 15ch;
+  margin-top: var(--ruimte-4);
+}
+
+@media (min-width: 900px) {
+  .landing__hooflyn { font-size: var(--teks-3xl); }
+}
+
+.landing__sub {
+  font-size: var(--teks-lg);
+  color: var(--kleur-teks-sag);
+  max-width: 46ch;
+}
+
+.landing__punte {
+  list-style: none;
+  padding: 0;
+  margin: var(--ruimte-2) 0 0;
+  display: grid;
+  gap: var(--ruimte-3);
+  max-width: 44ch;
+}
+
+.landing__punte li {
+  position: relative;
+  padding-left: var(--ruimte-5);
+  color: var(--kleur-teks-sag);
+}
+
+.landing__punte li::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 0.6em;
+  width: 8px;
+  height: 8px;
+  border-radius: var(--radius-vol);
+  background: var(--kleur-aksent);
+}
+
+/* --- Regs ---------------------------------------------------- */
+.landing__kaart {
+  background: var(--kleur-oppervlak);
+  border: 1px solid var(--kleur-rand);
+  border-radius: var(--radius-lg);
+  padding: var(--ruimte-6);
+  box-shadow: var(--skaduwee-md);
+}
+
+.oortjies {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: var(--ruimte-1);
+  background: var(--kleur-oppervlak-sag);
+  padding: var(--ruimte-1);
+  border-radius: var(--radius-md);
+  margin-bottom: var(--ruimte-5);
+}
+
+.oortjie {
+  font: inherit;
+  font-weight: 600;
+  padding: var(--ruimte-3);
+  min-height: var(--raak-min);
+  border: none;
+  border-radius: var(--radius-sm);
+  background: none;
+  color: var(--kleur-teks-sag);
+  cursor: pointer;
+  transition: background var(--oorgang-vinnig), color var(--oorgang-vinnig);
+}
+
+.oortjie--aktief {
+  background: var(--kleur-oppervlak);
+  color: var(--kleur-teks);
+  box-shadow: var(--skaduwee-sag);
+}
+
+.landing__vormkop {
+  font-size: var(--teks-lg);
+  margin-bottom: var(--ruimte-5);
+}
+
+.landing__merker {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--ruimte-2);
+  font-size: var(--teks-sm);
+  color: var(--kleur-teks-sag);
+  cursor: pointer;
+  min-height: var(--raak-min);
+}
+
+.landing__merker input { width: 18px; height: 18px; accent-color: var(--kleur-aksent); }
+
+.landing__tussen {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--ruimte-4);
+  flex-wrap: wrap;
+  margin-bottom: var(--ruimte-4);
+}
+
+/* Die skeiding tussen die vorm en sosiale aanmelding.
+   Die lyn loop agter die woord aan. */
+.landing__skeiding {
+  display: flex;
+  align-items: center;
+  gap: var(--ruimte-4);
+  margin: var(--ruimte-5) 0;
+  color: var(--kleur-teks-broos);
+  font-size: var(--teks-sm);
+}
+
+.landing__skeiding::before,
+.landing__skeiding::after {
+  content: "";
+  flex: 1;
+  height: 1px;
+  background: var(--kleur-rand);
+}
+
+.landing__sosiaal { display: grid; gap: var(--ruimte-3); }
+
+.landing__nota {
+  margin-top: var(--ruimte-4);
+  font-size: var(--teks-xs);
+  color: var(--kleur-teks-broos);
+  text-align: center;
+}
