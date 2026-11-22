@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html lang="af">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Registrasie-toets</title>
+  <script src="https://www.google.com/recaptcha/api.js?render=6LdP6ywuAAAAAAXrADrpHDPV3HjW7xuTVmt6qoGG"></script>
+  <style>
+    body { font-family: system-ui, sans-serif; max-width: 560px; margin: 2rem auto; padding: 0 1rem; line-height: 1.5; }
+    h1 { font-size: 1.25rem; }
+    label { display: block; margin-top: 0.75rem; font-size: 0.9rem; }
+    input, select { width: 100%; padding: 0.5rem; font: inherit; border: 1px solid #d1d5db; border-radius: 6px; }
+    button { margin-top: 1rem; padding: 0.6rem 1.1rem; font: inherit; background: #2563eb; color: #fff; border: 0; border-radius: 6px; cursor: pointer; }
+    pre { background: #f3f4f6; padding: 1rem; border-radius: 6px; overflow-x: auto; font-size: 0.8rem; }
+    .ok { color: #047857; }
+    .fout { color: #b91c1c; }
+    fieldset { border: 1px solid #e5e7eb; border-radius: 8px; padding: 0.5rem 1rem 1rem; }
+    legend { font-size: 0.85rem; color: #6b7280; }
+  </style>
+</head>
+<body>
+  <h1>Registrasie-toets</h1>
+  <p>Tik 'n e-posadres in en klik. Die bladsy kry 'n reCAPTCHA-token en stuur dit saam met die vorm na die backend.</p>
+
+  <form id="vorm">
+    <fieldset>
+      <legend>Verpligte velde</legend>
+      <label>E-posadres <input id="email" type="email" required placeholder="jou@eposadres.co.za" /></label>
+      <label>Wagwoord <input id="password" type="text" required value="SterkWagwoord123!" /></label>
+      <label>Naam <input id="firstName" type="text" required value="Willem" /></label>
+      <label>Van <input id="lastName" type="text" required value="Scholtz" /></label>
+    </fieldset>
+
+    <fieldset>
+      <legend>Opsionele velde</legend>
+      <label>Kontaknommer <input id="contactNumber" type="text" value="0821234567" /></label>
+      <label>Geboortedatum <input id="dateOfBirth" type="date" value="1990-05-15" /></label>
+      <label>Geslag
+        <select id="gender">
+          <option value="">(kies)</option>
+          <option>Manlik</option>
+          <option>Vroulik</option>
+          <option>Ander</option>
+        </select>
+      </label>
+    </fieldset>
+
+    <label style="margin-top:1rem">
+      <input id="gebruikLigging" type="checkbox" style="width:auto" />
+      Voeg my huidige ligging by
+    </label>
+
+    <button type="submit">Registreer</button>
+  </form>
+
+  <p id="status"></p>
+  <pre id="uitset">(nog niks)</pre>
+
+  <hr />
+  <h1 style="font-size:1rem">Inteken-toets</h1>
+  <p>Nadat jy geregistreer en die e-pos bevestig het, gebruik dieselfde e-posadres hier.</p>
+  <form id="intekenVorm">
+    <fieldset>
+      <legend>Inteken</legend>
+      <label>E-posadres <input id="i_email" type="email" required /></label>
+      <label>Wagwoord <input id="i_password" type="text" required value="SterkWagwoord123!" /></label>
+      <label style="margin-top:0.5rem">
+        <input id="i_onthou" type="checkbox" style="width:auto" checked />
+        Bly ingeteken vir 30 dae
+      </label>
+    </fieldset>
+    <button type="submit">Teken in</button>
+  </form>
+
+  <p id="i_status"></p>
+  <pre id="i_uitset">(nog niks)</pre>
+
+  <script>
+    const SITE_KEY = '6LdP6ywuAAAAAAXrADrpHDPV3HjW7xuTVmt6qoGG';
+
+    async function kryToken(action) {
+      return grecaptcha.execute(SITE_KEY, { action });
+    }
+
+    function wys(id, data) {
+      document.getElementById(id).textContent = JSON.stringify(data, null, 2);
+    }
+
+    function kryLigging() {
+      return new Promise((resolve) => {
+        if (!navigator.geolocation) return resolve({});
+        navigator.geolocation.getCurrentPosition(
+          (p) => resolve({
+            locationLat: p.coords.latitude,
+            locationLng: p.coords.longitude,
+          }),
+          () => resolve({}),
+          { timeout: 5000 }
+        );
+      });
+    }
+
+    // --- Registrasie ---
+    document.getElementById('vorm').addEventListener('submit', async (e) => {
+      e.preventDefault();
+      const status = document.getElementById('status');
+      status.textContent = 'Besig...';
+      status.className = '';
+
+      try {
+        const token = await kryToken('registreer');
+
+        const ligging = document.getElementById('gebruikLigging').checked
+          ? await kryLigging()
+          : {};
+
+        const liggaam = {
+          email: document.getElementById('email').value,
+          password: document.getElementById('password').value,
+          firstName: document.getElementById('firstName').value,
+          lastName: document.getElementById('lastName').value,
+          contactNumber: document.getElementById('contactNumber').value,
+          dateOfBirth: document.getElementById('dateOfBirth').value,
+          gender: document.getElementById('gender').value,
+          recaptchaToken: token,
+          ...ligging,
+        };
+
+        const res = await fetch('/api/auth/registreer', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify(liggaam),
+        });
+
+        const data = await res.json();
+        wys('uitset', { status: res.status, data });
+
+        if (res.ok) {
+          status.textContent = data.emailSent
+            ? 'Rekening geskep. Kyk in die inkassie vir die bevestigingskakel.'
+            : 'Rekening geskep, maar die e-pos kon nie gestuur word nie.';
+          status.className = 'ok';
+          document.getElementById('i_email').value = liggaam.email;
+        } else {
+          status.textContent = 'Geweier: ' + (data.error || res.status);
+          status.className = 'fout';
+        }
+      } catch (err) {
+        status.textContent = 'Fout: ' + err.message;
+        status.className = 'fout';
+      }
+    });
+
+    // --- Inteken ---
+    document.getElementById('intekenVorm').addEventListener('submit', async (e) => {
+      e.preventDefault();
+      const status = document.getElementById('i_status');
+      status.textContent = 'Besig...';
+      status.className = '';
+
+      try {
+        const token = await kryToken('teken_in');
+
+        const res = await fetch('/api/auth/teken-in', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          credentials: 'include',
+          body: JSON.stringify({
+            email: document.getElementById('i_email').value,
+            password: document.getElementById('i_password').value,
+            rememberMe: document.getElementById('i_onthou').checked,
+            recaptchaToken: token,
+          }),
+        });
+
+        const data = await res.json();
+        wys('i_uitset', { status: res.status, data });
+
+        if (res.ok) {
+          status.textContent = 'Ingeteken. Verval: ' + data.expiresAt;
+          status.className = 'ok';
+
+          // Kyk wie is ingeteken
+          const ek = await fetch('/api/auth/ek', { credentials: 'include' });
+          wys('i_uitset', { inteken: data, ek: await ek.json() });
+        } else {
+          status.textContent = 'Geweier: ' + (data.error || res.status);
+          status.className = 'fout';
+        }
+      } catch (err) {
+        status.textContent = 'Fout: ' + err.message;
+        status.className = 'fout';
+      }
+    });
+  </script>
+</body>
+</html>

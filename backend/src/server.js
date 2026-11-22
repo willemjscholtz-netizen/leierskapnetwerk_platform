@@ -1,13 +1,27 @@
 require('dotenv').config();
 const express = require('express');
 const cors = require('cors');
+const cookieParser = require('cookie-parser');
+
 const pool = require('./db/pool');
+const { laaiGebruiker } = require('./auth/session');
+const authRouter = require('./routes/auth');
 const notesRouter = require('./routes/notes');
 
 const app = express();
 
-app.use(cors());
+// credentials: true is nodig sodat die blaaier die sessie-koekie
+// saamstuur. Sonder dit werk inteken nie oor CORS nie.
+app.use(cors({ origin: true, credentials: true }));
 app.use(express.json());
+app.use(cookieParser());
+
+// Laai die ingetekende gebruiker op elke versoek (of niks, as
+// daar geen geldige sessie is nie). Alle roetes kry dit verniet.
+app.use(laaiGebruiker);
+
+// Die toetsblad in public/ (net vir ontwikkeling)
+app.use(express.static('public'));
 
 // Gesondheidskontrole - bewys die databasis antwoord
 app.get('/api/health', async (req, res) => {
@@ -20,9 +34,11 @@ app.get('/api/health', async (req, res) => {
   }
 });
 
+app.use('/api/auth', authRouter);
 app.use('/api/notes', notesRouter);
 
 const PORT = process.env.PORT || 3000;
 app.listen(PORT, () => {
   console.log(`Backend loop op http://localhost:${PORT}`);
+  console.log('Roetes: /api/health, /api/auth/*, /api/notes/*');
 });
