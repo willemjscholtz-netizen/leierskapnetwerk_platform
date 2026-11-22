@@ -1,0 +1,124 @@
+.knoppie {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 44px;
+  padding: 0 24px;
+  font-family: inherit;
+  font-size: 1rem;
+  font-weight: 600;
+  line-height: 1;
+  border: 1px solid transparent;
+  border-radius: 10px;
+  cursor: pointer;
+}
+
+.knoppie:disabled {
+  opacity: 0.55;
+  cursor: not-allowed;
+}
+
+/* Primere knoppie - die rooi uit die logo */
+.knoppie-primere {
+  background-color: #A33234;
+  color: #FFFFFF;
+}
+
+.knoppie-primere:hover:not(:disabled) {
+  background-color: #8A292B;
+}
+
+/* Sekondere knoppie */
+.knoppie-sekondere {
+  background-color: #FFFFFF;
+  color: #2C3247;
+  border-color: #A9B0C0;
+}
+
+.knoppie-sekondere:hover:not(:disabled) {
+  background-color: #EFF1F5;
+}
+
+/* Stil knoppie - net 'n skakel */
+.knoppie-stil {
+  background: none;
+  border: none;
+  padding: 0;
+  min-height: auto;
+  color: #A33234;
+  font-weight: 500;
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+
+.knoppie-stil:hover:not(:disabled) {
+  color: #8A292B;
+}
+
+.knoppie-vol {
+  width: 100%;
+}
+
+/* 'n Skakel wat soos 'n sekondere knoppie lyk. Ons gebruik 'n
+   gewone <a> vir sosiale aanmelding, want die OAuth-vloei die
+   bladsy verlaat -dit kan nie met 'n fetch werk nie. */
+a.knoppie {
+  text-decoration: none;
+}
+
+a.knoppie:focus-visible {
+  outline: 2px solid #A33234;
+  outline-offset: 2px;
+}
+
+/* Meta is nog nie beskikbaar nie */
+.knoppie-uit {
+  opacity: 0.5;
+  pointer-events: none;
+}
+
+/* --- Knoppie met 'n kenteken ---------------------------------
+   Die kenteken sit links van die teks. Google se riglyn vra dat
+   dit in sy eie kleure bly en op 'n wit agtergrond sit - dus is
+   die sosiale knoppie wit, nie rooi nie. */
+.knoppie-met-teken {
+  gap: 12px;
+  justify-content: center;
+}
+
+.knoppie-met-teken img,
+.knoppie-met-teken svg {
+  width: 18px;
+  height: 18px;
+  flex: none;
+  display: block;
+}
+
+/* ===============================================================
+   SEKONDERE KNOPPIE - die presiese spesifikasie:
+     - 'n dun buitelyn
+     - 'n ligte agtergrond, dieselfde as die bladsy se agtergrond
+     - die teks in vet druk
+   =============================================================== */
+
+.knoppie-sekondere {
+  background-color: var(--kleur-agtergrond);
+  color: var(--kleur-teks);
+  border: 1px solid var(--kleur-rand-sterk);
+  font-weight: 700;
+}
+
+.knoppie-sekondere:hover:not(:disabled) {
+  border-color: var(--kleur-teks-sag);
+  background-color: var(--kleur-oppervlak-sag);
+}
+
+/* Skakels wat soos 'n sekondêre knoppie lyk (die sosiale
+   aanmeldings) kry dieselfde behandeling. */
+a.knoppie-sekondere {
+  background-color: var(--kleur-oppervlak);
+  text-decoration: none;
+}
+a.knoppie-sekondere:hover {
+  background-color: var(--kleur-oppervlak-sag);
+}

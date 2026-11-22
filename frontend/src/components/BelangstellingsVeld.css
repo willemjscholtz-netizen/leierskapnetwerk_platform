@@ -1,0 +1,124 @@
+.bveld {
+  border: 1px solid var(--kleur-rand);
+  border-radius: var(--radius-md);
+  padding: var(--ruimte-4);
+  margin-bottom: var(--ruimte-4);
+  background: var(--kleur-oppervlak-sag);
+}
+
+.bveld__kop {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: var(--ruimte-3);
+  flex-wrap: wrap;
+  margin-bottom: var(--ruimte-3);
+}
+
+.bveld__naam {
+  font-size: var(--teks-md);
+  font-weight: 600;
+  margin: 0;
+  color: var(--kleur-teks);
+}
+
+.bveld__telling {
+  font-size: var(--teks-xs);
+  color: var(--kleur-teks-sag);
+  white-space: nowrap;
+}
+
+.bveld__skyfies {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--ruimte-2);
+  list-style: none;
+  margin: 0 0 var(--ruimte-3);
+  padding: 0;
+}
+
+.skyfie {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--ruimte-2);
+  padding: var(--ruimte-1) var(--ruimte-2);
+  font: inherit;
+  font-size: var(--teks-xs);
+  color: #fff;
+  background: var(--kleur-donker);
+  border: none;
+  border-radius: var(--radius-vol);
+  cursor: pointer;
+}
+
+.skyfie:hover {
+  background: var(--kleur-rooi);
+}
+
+.skyfie__naam {
+  max-width: 34ch;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.skyfie__kruis {
+  font-size: 1.1em;
+  line-height: 1;
+  opacity: 0.85;
+}
+
+.bveld__oop {
+  font: inherit;
+  font-size: var(--teks-sm);
+  color: var(--kleur-teks-sag);
+  background: none;
+  border: 1px dashed var(--kleur-rand-sterk);
+  border-radius: var(--radius-sm);
+  padding: var(--ruimte-2) var(--ruimte-3);
+  min-height: var(--raak-min);
+  cursor: pointer;
+  width: 100%;
+  text-align: left;
+}
+
+.bveld__oop:hover {
+  color: var(--kleur-rooi);
+  border-color: var(--kleur-rooi);
+}
+
+.bveld__lys {
+  list-style: none;
+  margin: var(--ruimte-3) 0 0;
+  padding: var(--ruimte-2) 0 0;
+  border-top: 1px solid var(--kleur-rand);
+  max-height: 340px;
+  overflow-y: auto;
+}
+
+.opsie {
+  display: flex;
+  align-items: flex-start;
+  gap: var(--ruimte-3);
+  padding: var(--ruimte-2);
+  border-radius: var(--radius-sm);
+  cursor: pointer;
+  font-size: var(--teks-sm);
+  line-height: var(--hoogte-lyf);
+}
+
+.opsie:hover {
+  background: var(--kleur-oppervlak);
+}
+
+.opsie input[type="checkbox"] {
+  flex: none;
+  margin-top: 0.25em;
+  accent-color: var(--kleur-rooi);
+  width: 1.05rem;
+  height: 1.05rem;
+}
+
+.opsie--gekies {
+  font-weight: 600;
+}

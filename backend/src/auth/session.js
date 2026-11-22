@@ -47,7 +47,7 @@ async function vindSessie(token) {
   const result = await pool.query(
     `select s.id as sessie_id, s.expires_at,
             u.id, u.email, u.first_name, u.last_name, u.auth_provider,
-            u.email_verified
+            u.email_verified, u.profile_photo
        from sessions s
        join users u on u.id = s.user_id
       where s.token_hash = $1
@@ -68,6 +68,7 @@ async function vindSessie(token) {
       last_name: ry.last_name,
       auth_provider: ry.auth_provider,
       email_verified: ry.email_verified,
+      profile_photo: ry.profile_photo,
     },
   };
 }

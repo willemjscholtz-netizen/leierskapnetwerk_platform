@@ -1,0 +1,23 @@
+.pen-ikoon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 32px;
+  height: 32px;
+  padding: 0;
+  border: none;
+  border-radius: var(--radius-sm);
+  background: none;
+  color: var(--kleur-teks-sag);
+  cursor: pointer;
+  flex: none;
+  transition: background var(--oorgang-vinnig), color var(--oorgang-vinnig);
+}
+
+.pen-ikoon:hover {
+  background: var(--kleur-oppervlak-sag);
+  color: var(--kleur-rooi);
+}
+
+/* Die fokus-ring kom van tokens.css se :focus-visible. Ons
+   verwyder dit nie hier nie. */

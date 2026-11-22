@@ -1,0 +1,9 @@
+.tuis__liggaam {
+  max-width: 720px;
+}
+
+.tuis__teks {
+  margin-top: var(--ruimte-4);
+  color: var(--kleur-teks-sag);
+  max-width: 52ch;
+}

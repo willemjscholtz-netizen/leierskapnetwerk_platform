@@ -32,7 +32,9 @@ router.get('/', async (req, res) => {
       `select id, email, first_name, last_name, contact_number,
               date_of_birth, age, gender,
               location_lat, location_lng, location_text,
-              auth_provider, email_verified, created_at, updated_at
+              auth_provider, email_verified, profile_photo,
+              location_accuracy, location_updated_at,
+              created_at, updated_at
          from public.users
         where id = $1`,
       [req.gebruiker.id]
@@ -131,7 +133,9 @@ router.patch('/', async (req, res) => {
         where id = $${waardes.length}
         returning id, email, first_name, last_name, contact_number,
                   date_of_birth, age, gender,
-                  location_lat, location_lng, location_text, updated_at`,
+                  location_lat, location_lng, location_text,
+                  location_accuracy, location_updated_at,
+                  profile_photo, updated_at`,
       waardes
     );
 

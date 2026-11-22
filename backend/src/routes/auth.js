@@ -9,6 +9,7 @@ const {
 const { verifieerRecaptcha } = require('../auth/recaptcha');
 const { skepBevestigingstoken, wisselBevestigingstoken } = require('../auth/email-token');
 const { stuurBevestiging } = require('../email/mailer');
+const { kryPleknaam } = require('../location/nominatim');
 
 const router = express.Router();
 
@@ -159,7 +160,8 @@ router.get('/bevestig', async (req, res) => {
 // POST /api/auth/teken-in
 // ---------------------------------------------------------------
 router.post('/teken-in', async (req, res) => {
-  const { email, password, rememberMe, recaptchaToken } = req.body ?? {};
+  const { email, password, rememberMe, recaptchaToken,
+          locationLat, locationLng, locationAccuracy } = req.body ?? {};
 
   try {
     const captcha = await verifieerRecaptcha(recaptchaToken, req.ip);
@@ -192,6 +194,57 @@ router.post('/teken-in', async (req, res) => {
       return res.status(403).json({
         error: 'Bevestig eers jou e-posadres. Kyk in jou inkassie vir die bevestigingskakel.',
       });
+    }
+
+    // --- Die ligging opneem ---------------------------------
+    //
+    // Die blaaier het die ligging gestuur saam met die inteken.
+    // Het hy niks gestuur nie (geweier, of nie ondersteun nie),
+    // dan los ons die bestaande waarde staan - ons maak dit nie
+    // leeg nie.
+    //
+    // Ons vra Nominatim NET as die ligging werklik verander het.
+    // Anders sou elke aanmelding 'n versoek wees na 'n gratis
+    // diens met streng reëls.
+    const hetLigging =
+      Number.isFinite(Number(locationLat)) &&
+      Number.isFinite(Number(locationLng));
+
+    if (hetLigging) {
+      const lat = Number(locationLat);
+      const lng = Number(locationLng);
+
+      const vorige = await pool.query(
+        'select location_lat, location_lng from public.users where id = $1',
+        [gebruiker.id]
+      );
+
+      const ou = vorige.rows[0] ?? {};
+      const verander =
+        ou.location_lat === null || ou.location_lng === null ||
+        Math.abs(Number(ou.location_lat) - lat) > 0.0005 ||
+        Math.abs(Number(ou.location_lng) - lng) > 0.0005;
+
+      let pleknaam = null;
+      if (verander) {
+        pleknaam = await kryPleknaam(lat, lng);
+      }
+
+      const akkuraatheid = Number.isFinite(Number(locationAccuracy))
+        ? Number(locationAccuracy)
+        : null;
+
+      await pool.query(
+        `update public.users
+            set location_lat = $1,
+                location_lng = $2,
+                location_text = coalesce($3, location_text),
+                location_accuracy = coalesce($4, location_accuracy),
+                location_updated_at = now(),
+                updated_at = now()
+          where id = $5`,
+        [lat, lng, pleknaam, akkuraatheid, gebruiker.id]
+      );
     }
 
     const sessie = await skepSessie(gebruiker.id, Boolean(rememberMe), req);

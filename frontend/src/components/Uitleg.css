@@ -1,0 +1,107 @@
+/* ===============================================================
+   DIE RAAMWERK - gebruik deur ELKE bladsy
+   ===============================================================
+
+   Die bladsy is 100% van die skermhoogte. Die romp vul wat oor
+   is nadat die header sy plek geneem het, en elke kolom rol
+   self. So bly die header en die sybalke staan wanneer die
+   inhoud lank is.
+
+   DRIE REËLS WAT NIE OORBODIG IS NIE:
+     - height: 100dvh langs 100vh (selfoon se adresbalk)
+     - min-height: 0 op die romp EN die kolomme (anders groei 'n
+       grid-kolom verby die skerm in plaas van om te rol)
+     - overflow: hidden op die buitekant, auto op die kolomme */
+
+.uitleg {
+  height: 100vh;
+  height: 100dvh;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  background: var(--kleur-agtergrond);
+}
+
+/* --- Die header --------------------------------------------- */
+
+.uitleg__kop {
+  flex: none;
+  background: var(--kleur-oppervlak);
+  border-bottom: 1px solid var(--kleur-rand);
+  box-shadow: var(--skaduwee-sag);
+  z-index: 10;
+}
+
+/* --- Die romp: die kolomme ---------------------------------- */
+
+.uitleg__romp {
+  flex: 1;
+  min-height: 0;
+  display: grid;
+  grid-template-columns: 1fr;
+  overflow: hidden;
+}
+
+/* Die kolomme kom sodra daar plek is. 300 + 300 + 'n leesbare
+   inhoud beteken die skerm moet omtrent 1100px wyd wees. */
+@media (min-width: 1100px) {
+  .uitleg__romp--links.uitleg__romp--regs {
+    grid-template-columns: 300px minmax(0, 1fr) 300px;
+  }
+  .uitleg__romp--links:not(.uitleg__romp--regs) {
+    grid-template-columns: 300px minmax(0, 1fr);
+  }
+  .uitleg__romp--regs:not(.uitleg__romp--links) {
+    grid-template-columns: minmax(0, 1fr) 300px;
+  }
+}
+
+/* --- Die sybalke -------------------------------------------- */
+
+.uitleg__sy {
+  min-height: 0;
+  overflow-y: auto;
+  background: var(--kleur-oppervlak);
+}
+
+.uitleg__sy--links { border-right: 1px solid var(--kleur-rand); }
+.uitleg__sy--regs  { border-left: 1px solid var(--kleur-rand); }
+
+/* Op 'n smaller skerm verdwyn die sybalke - 'n 300px-sybalk
+   langs 'n 300px-inhoud is onleesbaar. */
+@media (max-width: 1099px) {
+  .uitleg__sy { display: none; }
+}
+
+/* --- Die inhoud --------------------------------------------- */
+
+.uitleg__inhoud {
+  min-height: 0;
+  overflow-y: auto;
+  padding: var(--ruimte-6);
+}
+
+@media (max-width: 640px) {
+  .uitleg__inhoud { padding: var(--ruimte-4); }
+}
+
+/* --- Die inhoud van 'n sybalk -------------------------------- */
+
+.sy-inhoud {
+  padding: var(--ruimte-5) var(--ruimte-4);
+}
+
+.sy-inhoud__titel {
+  font-size: var(--teks-xs);
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--kleur-teks-broos);
+  margin-bottom: var(--ruimte-3);
+}
+
+.sy-inhoud__leeg {
+  font-size: var(--teks-sm);
+  color: var(--kleur-teks-broos);
+  font-style: italic;
+}

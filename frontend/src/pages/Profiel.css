@@ -1,0 +1,230 @@
+/* ===============================================================
+   DIE PROFIELBLAD
+   ===============================================================
+
+   Die bladsy self kom van die Uitleg-raamwerk. Hier is net die
+   inhoud. */
+
+/* Die kaarte vul die volle breedte van die middelste kolom.
+   Geen max-width hier nie - die mens se oog word gelei deur die
+   kaart se eie rand, nie deur 'n smal strook in die middel. */
+.profiel__liggaam {
+  width: 100%;
+}
+
+/* --- Die ronde profielprent + die naam ------------------------
+   Die prent staan LINKS, die naam en van REGS daarvan. Dit lees
+   soos 'n mens se eie bladsy in 'n profiel: 'n gesig, dan die
+   naam in grootletters langsaan. */
+
+.profiel__prentblok {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: var(--ruimte-6);
+  margin-bottom: var(--ruimte-6);
+}
+
+/* Op 'n selfoon is daar nie plek vir 'n 200px-prent langs die
+   naam nie - dan stapel hulle weer. */
+@media (max-width: 560px) {
+  .profiel__prentblok {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: var(--ruimte-4);
+  }
+}
+
+.profiel__prent {
+  position: relative;
+  flex: none;
+  width: 200px;
+  height: 200px;
+  padding: 0;
+  border: 2px solid var(--kleur-rand);
+  /* Dit maak die prent ROND. 'n Profielprent is altyd rond. */
+  border-radius: var(--radius-vol);
+  overflow: hidden;
+  background: var(--kleur-donker);
+  color: #fff;
+  font-family: var(--font-liggaam);
+  font-size: 4rem;
+  font-weight: 600;
+  letter-spacing: 0.02em;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: border-color var(--oorgang-vinnig);
+}
+
+@media (max-width: 560px) {
+  .profiel__prent { width: 140px; height: 140px; font-size: 2.75rem; }
+}
+
+.profiel__prent:hover,
+.profiel__prent:focus-visible {
+  border-color: var(--kleur-rooi);
+}
+
+.profiel__prentbeeld {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+.profiel__voorletters {
+  user-select: none;
+}
+
+/* Die "Verander"-laag verskyn wanneer die mens oor die prent
+   beweeg. Dit sê wat 'n klik gaan doen. */
+.profiel__prent-oorleg {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(44, 50, 71, 0.65);
+  color: #fff;
+  font-size: var(--teks-sm);
+  font-weight: 700;
+  opacity: 0;
+  transition: opacity var(--oorgang-normaal);
+}
+
+.profiel__prent:hover .profiel__prent-oorleg,
+.profiel__prent:focus-visible .profiel__prent-oorleg {
+  opacity: 1;
+}
+
+/* Op 'n raakskerm is daar geen "hover" nie, so die laag bly
+   altyd effens sigbaar sodat die mens weet die prent is
+   klikbaar. */
+@media (hover: none) {
+  .profiel__prent-oorleg { opacity: 1; background: rgba(44, 50, 71, 0.45); }
+}
+
+/* --- Die naam regs van die prent ------------------------------ */
+
+.profiel__naamblok {
+  display: flex;
+  flex-direction: column;
+  gap: var(--ruimte-2);
+  min-width: 0;
+}
+
+.profiel__prentnaam {
+  font-family: var(--font-opskrif);
+  font-size: var(--teks-3xl);
+  font-weight: 600;
+  line-height: 1.1;
+  letter-spacing: -0.02em;
+  color: var(--kleur-teks);
+  overflow-wrap: anywhere;
+}
+
+@media (max-width: 900px) {
+  .profiel__prentnaam { font-size: var(--teks-2xl); }
+}
+
+
+/* --- Die kaarte ---------------------------------------------- */
+
+.profiel__kaart {
+  background: var(--kleur-oppervlak);
+  border: 1px solid var(--kleur-rand);
+  border-radius: var(--radius-lg);
+  padding: var(--ruimte-5);
+  margin-bottom: var(--ruimte-5);
+  box-shadow: var(--skaduwee-sag);
+}
+
+.profiel__afdeling {
+  font-size: var(--teks-lg);
+  margin: 0 0 var(--ruimte-4);
+  padding-bottom: var(--ruimte-3);
+  border-bottom: 1px solid var(--kleur-rand);
+}
+
+.profiel__afdelingry {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--ruimte-3);
+  margin-bottom: var(--ruimte-4);
+  padding-bottom: var(--ruimte-3);
+  border-bottom: 1px solid var(--kleur-rand);
+}
+
+.profiel__afdelingry .profiel__afdeling {
+  margin: 0;
+  padding: 0;
+  border: none;
+}
+
+.profiel__lys {
+  margin: 0;
+  display: grid;
+  gap: var(--ruimte-3);
+}
+
+.profiel__reel {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 2px;
+}
+
+@media (min-width: 560px) {
+  .profiel__reel {
+    grid-template-columns: 200px 1fr;
+    gap: var(--ruimte-4);
+    align-items: baseline;
+  }
+}
+
+.profiel__etiket {
+  font-size: var(--teks-sm);
+  color: var(--kleur-teks-sag);
+  font-weight: 600;
+}
+
+.profiel__waarde {
+  margin: 0;
+  font-size: var(--teks-md);
+  color: var(--kleur-teks);
+  overflow-wrap: anywhere;
+}
+
+.profiel__waarde--leeg {
+  color: var(--kleur-teks-broos);
+  font-style: italic;
+}
+
+.profiel__knoppies {
+  display: flex;
+  gap: var(--ruimte-3);
+  flex-wrap: wrap;
+}
+
+select.veld__inset {
+  appearance: none;
+  background-image: url("data:image/svg+xml;charset=utf-8,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8'%3E%3Cpath fill='%235A6278' d='M6 8L0 0h12z'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: right var(--ruimte-4) center;
+  padding-right: var(--ruimte-7);
+}
+
+/* --- Die ligging onder die naam -------------------------------
+   Dieselfde grootte as gewone inhoud-teks (--teks-md), so dit
+   lees as deel van die inligting en nie as 'n byskrif nie.
+   Dit is effens doffer as die naam, want die naam is die belang-
+   rikste ding in hierdie blok. */
+
+.profiel__ligging {
+  font-size: var(--teks-md);
+  line-height: var(--hoogte-lyf);
+  color: var(--kleur-teks);
+  overflow-wrap: anywhere;
+}
