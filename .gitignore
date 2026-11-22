@@ -11,3 +11,9 @@ npm-debug.log*
 # Redigeerder
 .vscode/
 .idea/
+
+# E-poswagwoord vir ontwikkeling
+.mailpass
+
+# Rugsteunlêers
+*.bak
