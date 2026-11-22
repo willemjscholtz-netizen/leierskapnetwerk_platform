@@ -1,0 +1,13 @@
+# Geheime - die belangrikste reel in hierdie leer
+.env
+
+# Node
+node_modules/
+npm-debug.log*
+
+# macOS
+.DS_Store
+
+# Redigeerder
+.vscode/
+.idea/
