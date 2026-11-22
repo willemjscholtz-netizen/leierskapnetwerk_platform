@@ -29,6 +29,28 @@
   line-height: 1;
 }
 
+/* Die profielprent in die ikoon. Die knoppie is rond, die
+   prent is reghoekig - sonder border-radius steek die hoeke
+   uit. */
+.ikoon__prent {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: var(--radius-vol);
+  display: block;
+}
+
+/* Die profielprent in die ikoon. Die knoppie is rond, die
+   prent is reghoekig - sonder border-radius steek die hoeke
+   uit. */
+.ikoon__prent {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: var(--radius-vol);
+  display: block;
+}
+
 .ikoon__kieslys {
   position: absolute;
   top: calc(100% + 8px);

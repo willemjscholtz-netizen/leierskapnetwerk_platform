@@ -61,7 +61,15 @@ export default function GebruikersIkoon({ gebruiker, opProfiel, opUitteken }) {
         aria-expanded={oop}
         aria-label={`Rekening van ${gebruiker?.first_name ?? 'gebruiker'}`}
       >
-        <span className="ikoon__voorletters" aria-hidden="true">{voorletters}</span>
+        {gebruiker?.profile_photo ? (
+          <img
+            src={gebruiker.profile_photo}
+            alt=""
+            className="ikoon__prent"
+          />
+        ) : (
+          <span className="ikoon__voorletters" aria-hidden="true">{voorletters}</span>
+        )}
       </button>
 
       {oop && (

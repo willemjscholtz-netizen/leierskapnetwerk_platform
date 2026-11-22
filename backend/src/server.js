@@ -11,13 +11,19 @@ const authMetaRouter = require('./routes/auth-meta');
 const profielRouter = require('./routes/profiel');
 const profielVolledigheidRouter = require('./routes/profiel-volledigheid');
 const profielPrentRouter = require('./routes/profiel-prent');
+const profielVoorkeureRouter = require('./routes/voorkeure');
 
 const app = express();
 
 // credentials: true is nodig sodat die blaaier die sessie-koekie
 // saamstuur. Sonder dit werk inteken nie oor CORS nie.
 app.use(cors({ origin: true, credentials: true }));
-app.use(express.json());
+
+// Die profielprent kom as 'n base64-datastring. base64 is omtrent
+// 33% groter as die rou grepe, so 400 KB rou word ~545 KB op die draad.
+// Sonder hierdie limiet weier Express enige prent oor 100 KB met 'n 413.
+app.use(express.json({ limit: '2mb' }));
+
 app.use(cookieParser());
 
 // Laai die ingetekende gebruiker op elke versoek (of niks, as
@@ -43,6 +49,7 @@ app.use('/api/auth/meta', authMetaRouter);
 app.use('/api/auth', authRouter);
 app.use('/api/profiel/volledigheid', profielVolledigheidRouter);
 app.use('/api/profiel/prent', profielPrentRouter);
+app.use('/api/profiel/voorkeure', profielVoorkeureRouter);
 app.use('/api/profiel', profielRouter);
 
 const PORT = process.env.PORT || 3000;

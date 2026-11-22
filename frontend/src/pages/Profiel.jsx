@@ -6,6 +6,7 @@ import Veld from '../components/Veld';
 import Mededeling from '../components/Mededeling';
 import PenIkoon from '../components/PenIkoon';
 import PrentSnyer from '../components/PrentSnyer';
+import Voorkeure from '../components/Voorkeure';
 import { api } from '../lib/api';
 import { vertoonFoon, maakFoonSkoon } from '../lib/foon';
 import './Profiel.css';
@@ -377,7 +378,9 @@ export default function Profiel({ gebruiker, opTuis, opUitteken, opBygewerk }) {
               </dl>
             </section>
 
-            <section className="profiel__kaart">
+                        <Voorkeure />
+
+<section className="profiel__kaart">
               <h2 className="profiel__afdeling">Rekening</h2>
               <dl className="profiel__lys">
                 <Reël etiket="Aangemeld met" waarde={providerNaam} />

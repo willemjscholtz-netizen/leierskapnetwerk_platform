@@ -1,0 +1,39 @@
+.voorkeure {
+  background: var(--kleur-oppervlak);
+  border: 1px solid var(--kleur-rand);
+  border-radius: var(--radius-lg);
+  padding: var(--ruimte-5);
+  margin-bottom: var(--ruimte-5);
+  box-shadow: var(--skaduwee-sag);
+}
+
+.voorkeure__kop {
+  margin-bottom: var(--ruimte-4);
+  padding-bottom: var(--ruimte-3);
+  border-bottom: 1px solid var(--kleur-rand);
+}
+
+.voorkeure__titel {
+  font-size: var(--teks-lg);
+  margin: 0 0 var(--ruimte-2);
+}
+
+.voorkeure__hulp {
+  font-size: var(--teks-sm);
+  color: var(--kleur-teks-sag);
+}
+
+.voorkeure__leeg {
+  font-size: var(--teks-sm);
+  color: var(--kleur-teks-broos);
+  font-style: italic;
+}
+
+.voorkeure__knoppies {
+  display: flex;
+  gap: var(--ruimte-3);
+  flex-wrap: wrap;
+  margin-top: var(--ruimte-5);
+  padding-top: var(--ruimte-4);
+  border-top: 1px solid var(--kleur-rand);
+}
